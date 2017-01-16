@@ -1,0 +1,58 @@
+<resources>
+    <string name="app_name">Autoskola</string>
+
+    <!--Login screen-->
+    <string name="e_mail">E-mail</string>
+    <string name="password">Password</string>
+    <string name="sign_in">sign in</string>
+    <string name="i_need_to_register">I need to register</string>
+    <string name="signing_in">Signing in …</string>
+    <!--End of login screen-->
+
+    <!--Sign up screen-->
+    <string name="first_name">First name</string>
+    <string name="surname">Surname</string>
+    <string name="e_mail_sign_up">E-mail</string>
+    <string name="phone_number">Phone number</string>
+    <string name="sign_up">Sign up</string>
+    <string name="password_sign_up">Password</string>
+    <string name="creating_your_account">Creating your account …</string>
+    <string name="password_to_create_instructor_account">Instructor account password</string>
+    <string name="instructor_account">Instructor account?</string>
+    <!--End of sign up screen-->
+
+    <!--Dashboard screen-->
+    <string name="logout">Logout</string>
+    <string name="loading">Loading your rides …</string>
+    <string name="title_activity_instructor">InstructorActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <!--End of dashboard screen-->
+
+    <!--Instructor screen-->
+    <string name="loading_instructor">Loading rides and students …</string>
+    <string name="student_dialog_title">Student info</string>
+    <string name="call_student">Call</string>
+    <string name="cancel">Cancel</string>
+    <!--End of instructor screen -->
+
+    <!--Add ride screen-->
+    <string name="save">Save</string>
+    <string name="enter_date">Enter date</string>
+    <string name="enter_time">Enter time</string>
+    <string name="creating_ride">Creating ride …</string>
+    <string name="student">Student</string>
+    <string name="car">Car</string>
+    <string name="instructor">Instructor</string>
+    <string name="note">Note</string>
+    <string name="rides_in_the_day">Rides in the day</string>
+    <string name="no_rides">No rides this day</string>
+    <string name="note_title">Note:</string>
+    <string name="instructor_rides_title">Your rides</string>
+    <string name="instructor_students_title">Your students</string>
+    <string name="instructor_default_title">Instructor</string>
+    <string name="registration_title">Registration</string>
+    <string name="add_ride_title">Add ride</string>
+    <!--End of add ride screen-->
+
+</resources>

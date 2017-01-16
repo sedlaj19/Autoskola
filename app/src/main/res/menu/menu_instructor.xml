@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="cz.sedlaj19.autoskola.presentation.ui.activities.InstructorActivity">
+    <item
+        android:id="@+id/menu_instructor_logout"
+        android:orderInCategory="100"
+        android:title="@string/logout"
+        app:showAsAction="always" />
+</menu>

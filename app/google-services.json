@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "426377858562",
+    "firebase_url": "https://autoskola-ece7e.firebaseio.com",
+    "project_id": "autoskola-ece7e",
+    "storage_bucket": "autoskola-ece7e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:426377858562:android:46b1e7e24c9887d9",
+        "android_client_info": {
+          "package_name": "cz.sedlaj19.autoskola"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "426377858562-mjemb1srq1nitr0c8q72u07hb0gfd5ol.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "cz.sedlaj19.autoskola",
+            "certificate_hash": "A3994879587D4CC3096FA020E8EF529F5AC59F9B"
+          }
+        },
+        {
+          "client_id": "426377858562-8ubkeah0qjb79in2j21fig1l5cf6sk78.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_mOmuEKyoHOo_hV_9oKt0zevw0krnNUk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "426377858562-8ubkeah0qjb79in2j21fig1l5cf6sk78.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
