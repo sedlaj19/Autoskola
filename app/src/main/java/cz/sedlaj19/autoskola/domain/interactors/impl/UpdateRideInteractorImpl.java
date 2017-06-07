@@ -43,7 +43,7 @@ public class UpdateRideInteractorImpl extends AbstractInteractor implements Upda
         cz.sedlaj19.autoskola.storage.model.Ride rideToStore = RideConverter.convertToStrorageModel(this.ride);
         Map<String, Object> rideValues = rideToStore.toMap();
         Map<String, Object> childUpdates = new HashMap<>();
-        childUpdates.put("/Rides/" + ride.getId(), rideValues);
+        childUpdates.put("/" + Constants.FirebaseModels.RIDES + "/" + ride.getId(), rideValues);
         database.updateChildren(childUpdates).addOnCompleteListener(this);
     }
 

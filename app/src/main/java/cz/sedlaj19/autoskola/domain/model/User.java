@@ -17,6 +17,7 @@ public class User implements Parcelable{
     public static final String USER_FINISHED = "userFinished";
     public static final String USER_IS_INSTRUCTOR = "userIsInstructor";
     public static final String USER_RIDES = "userRides";
+    public static final String USER_DEVICE_ID = "userDeviceId";
 
     private String id;
     private String Name;
@@ -26,20 +27,23 @@ public class User implements Parcelable{
     private ArrayList<Ride> Rides;
     private boolean Finished;
     private boolean IsInstructor;
+    private String DeviceId;
 
     public User(){}
 
-    public User(String Name, String Surname, String Phone, String Email, boolean isInstructor) {
+    public User(String Name, String Surname, String Phone,
+                String Email, boolean isInstructor, String deviceId) {
         this.Name = Name;
         this.Surname = Surname;
         this.Phone = Phone;
         this.Email = Email;
         this.Finished = false;
         this.IsInstructor = isInstructor;
+        this.DeviceId = deviceId;
     }
 
     public User(String Name, String Surname, String Phone, String Email,
-                ArrayList<Ride> Rides, boolean isInstructor){
+                ArrayList<Ride> Rides, boolean isInstructor, String deviceId){
         this.Name = Name;
         this.Surname = Surname;
         this.Phone = Phone;
@@ -47,6 +51,7 @@ public class User implements Parcelable{
         this.Rides = Rides;
         this.Finished = false;
         this.IsInstructor = isInstructor;
+        this.DeviceId = deviceId;
     }
 
     public String getId() {
@@ -113,6 +118,14 @@ public class User implements Parcelable{
         IsInstructor = instructor;
     }
 
+    public String getDeviceId() {
+        return DeviceId;
+    }
+
+    public void setDeviceId(String deviceId) {
+        this.DeviceId = deviceId;
+    }
+
     @Override
     public String toString() {
         String rds = "";
@@ -138,6 +151,7 @@ public class User implements Parcelable{
         bundle.putBoolean(USER_FINISHED, this.Finished);
         bundle.putBoolean(USER_IS_INSTRUCTOR, this.IsInstructor);
         bundle.putParcelableArrayList(USER_RIDES, this.Rides);
+        bundle.putString(USER_DEVICE_ID, this.DeviceId);
         parcel.writeBundle(bundle);
     }
 
@@ -163,5 +177,6 @@ public class User implements Parcelable{
         this.Finished = bundle.getBoolean(USER_FINISHED);
         this.IsInstructor = bundle.getBoolean(USER_IS_INSTRUCTOR);
         this.Rides = bundle.getParcelableArrayList(USER_RIDES);
+        this.DeviceId = bundle.getString(USER_DEVICE_ID);
     }
 }

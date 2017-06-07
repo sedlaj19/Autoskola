@@ -2,6 +2,7 @@ package cz.sedlaj19.autoskola.presentation.ui.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +11,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import cz.sedlaj19.autoskola.R;
 import cz.sedlaj19.autoskola.domain.model.User;
@@ -28,11 +29,11 @@ public class StudentsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        @Bind(R.id.student_item_name)
+        @BindView(R.id.student_item_name)
         TextView studentName;
-        @Bind(R.id.student_item_phone)
+        @BindView(R.id.student_item_phone)
         TextView studentPhone;
-        @Bind(R.id.student_item_email)
+        @BindView(R.id.student_item_email)
         TextView studentEmail;
 
         private OnStudentClickListener listener;
@@ -86,12 +87,26 @@ public class StudentsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         if(this.students != null && !this.students.isEmpty()){
             this.students.clear();
         }
-        this.students = students;
+        this.students = new ArrayList<>(students);
         notifyDataSetChanged();
     }
 
     @Override
     public void onStudentClick(int position) {
         view.onStudentClicked(this.students.get(position));
+    }
+
+    public User getStudent(int position){
+        return this.students.get(position);
+    }
+
+    public void removeStudent(int position){
+        this.students.remove(position);
+        notifyItemRemoved(position);
+    }
+
+    public void addStudent(User student, int position){
+        this.students.add(position, student);
+        notifyItemInserted(position);
     }
 }

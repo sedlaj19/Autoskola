@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import cz.sedlaj19.autoskola.R;
 import cz.sedlaj19.autoskola.utils.Converter;
@@ -37,15 +37,15 @@ public class RideAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        @Bind(R.id.ride_item_date)
+        @BindView(R.id.ride_item_date)
         public TextView date;
-        @Bind(R.id.ride_item_car)
+        @BindView(R.id.ride_item_car)
         public TextView car;
-        @Bind(R.id.ride_item_user)
+        @BindView(R.id.ride_item_user)
         public TextView user;
-        @Bind(R.id.ride_item_note)
+        @BindView(R.id.ride_item_note)
         public TextView notes;
-        @Bind(R.id.ride_item_note_wrapper)
+        @BindView(R.id.ride_item_note_wrapper)
         public View notesWrapper;
 
         private boolean instructor;
@@ -63,7 +63,7 @@ public class RideAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
             Date d = new Date(ride.getDateMillis());
             String formattedDate = Converter.convertDateAndTimeToString(d);
             this.date.setText(formattedDate);
-            this.car.setText(ride.getCar());
+            this.car.setText(Container.getInstance().getCarByKey(ride.getCar()));
             String note = ride.getNotes();
             if(note == null || note.isEmpty()){
                 this.notesWrapper.setVisibility(View.GONE);
@@ -114,13 +114,28 @@ public class RideAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
         return rideList.size();
     }
 
+    public Ride getRide(int position){
+        return rideList.get(position);
+    }
+
+    public void removeRide(int position){
+        rideList.remove(position);
+        notifyItemRemoved(position);
+    }
+
+    public void addRide(Ride ride, int position){
+        rideList.add(position, ride);
+        notifyItemInserted(position);
+    }
+
     public void addNewRides(List<Ride> rides){
         if(rideList != null && !rideList.isEmpty()){
             rideList.clear();
         }
-        for(Ride ride : rides){
-            rideList.add(ride);
-        }
+//        for(Ride ride : rides){
+//            rideList.add(ride);
+//        }
+        this.rideList = new ArrayList<>(rides);
         notifyDataSetChanged();
     }
 }

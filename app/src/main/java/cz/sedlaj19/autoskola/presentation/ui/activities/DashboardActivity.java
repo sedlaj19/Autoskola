@@ -1,11 +1,13 @@
 package cz.sedlaj19.autoskola.presentation.ui.activities;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Layout;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,12 +15,13 @@ import android.view.View;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import cz.sedlaj19.autoskola.Constants;
 import cz.sedlaj19.autoskola.R;
 import cz.sedlaj19.autoskola.domain.executor.MainThread;
 import cz.sedlaj19.autoskola.domain.executor.impl.ThreadExecutor;
+import cz.sedlaj19.autoskola.domain.model.Car;
 import cz.sedlaj19.autoskola.domain.model.Ride;
 import cz.sedlaj19.autoskola.domain.model.User;
 import cz.sedlaj19.autoskola.domain.repository.Container;
@@ -32,9 +35,9 @@ public class DashboardActivity extends AppCompatActivity implements DashboardPre
     private DashboardPresenter mDashboardPresenter;
     private RideAdapter mRideAdapter;
 
-    @Bind(R.id.dashboard_ride_list)
+    @BindView(R.id.dashboard_ride_list)
     RecyclerView mRideList;
-    @Bind(R.id.dashboard_progress_wrapper)
+    @BindView(R.id.dashboard_progress_wrapper)
     View mProgressWrapper;
 
     @Override
@@ -42,8 +45,19 @@ public class DashboardActivity extends AppCompatActivity implements DashboardPre
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
         ButterKnife.bind(this);
-
         init();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mDashboardPresenter.pause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mDashboardPresenter.resume();
     }
 
     private void init(){
@@ -57,7 +71,6 @@ public class DashboardActivity extends AppCompatActivity implements DashboardPre
         mRideList.setLayoutManager(new LinearLayoutManager(this));
         mRideList.setAdapter(mRideAdapter);
 
-        mDashboardPresenter.getInstructors();
     }
 
     @Override
@@ -73,6 +86,9 @@ public class DashboardActivity extends AppCompatActivity implements DashboardPre
             case R.id.menu_dashboard_logout:
                 mDashboardPresenter.doLogout();
                 return true;
+            case R.id.menu_dashboard_websites:
+
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -86,13 +102,11 @@ public class DashboardActivity extends AppCompatActivity implements DashboardPre
 
     @Override
     public void onUserRidesRetrieved() {
-        Log.d(this.getClass().toString(), "Tradaaaa");
         mRideAdapter.addNewRides(Container.getInstance().getRides());
     }
 
     @Override
     public void onInstructorRetrieved() {
-        Log.d(this.getClass().toString(), "Instructors retrieved");
         mDashboardPresenter.getUserRides();
     }
 
@@ -111,5 +125,22 @@ public class DashboardActivity extends AppCompatActivity implements DashboardPre
     @Override
     public void showError(String message, int what) {
 
+    }
+
+    @Override
+    public void onCarsRetrieved(List<Car> cars) {
+        mDashboardPresenter.getUserRides();
+    }
+
+    @Override
+    public void onWebsitesRetrieved(String name) {
+        String url = mDashboardPresenter.checkUrl(name);
+        if(TextUtils.isEmpty(url)){
+            // TODO: Show some error
+            return;
+        }
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(url));
+        startActivity(intent);
     }
 }

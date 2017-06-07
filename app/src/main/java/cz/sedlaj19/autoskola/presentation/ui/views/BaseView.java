@@ -1,4 +1,4 @@
-package cz.sedlaj19.autoskola.presentation.ui;
+package cz.sedlaj19.autoskola.presentation.ui.views;
 
 /**
  * <p>

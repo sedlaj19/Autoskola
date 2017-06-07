@@ -1,17 +1,16 @@
 package cz.sedlaj19.autoskola.presentation.presenters;
 
-import java.util.List;
-
-import cz.sedlaj19.autoskola.domain.model.Ride;
 import cz.sedlaj19.autoskola.presentation.presenters.base.BasePresenter;
-import cz.sedlaj19.autoskola.presentation.ui.BaseView;
+import cz.sedlaj19.autoskola.presentation.ui.views.BaseView;
+import cz.sedlaj19.autoskola.presentation.ui.views.GetCarsView;
+import cz.sedlaj19.autoskola.presentation.ui.views.WebsiteView;
 
 /**
  * Created by Honza on 28. 7. 2016.
  */
-public interface DashboardPresenter extends BasePresenter {
+public interface DashboardPresenter extends WebsitePresenter {
 
-    interface View extends BaseView{
+    interface View extends WebsiteView {
 
         void onLogoutFinished();
         void onUserRidesRetrieved();
@@ -21,6 +20,9 @@ public interface DashboardPresenter extends BasePresenter {
 
     void doLogout();
     void getUserRides();
+    void getCars();
     void getInstructors();
+    void carsRetrieved(boolean retrieved);
+    String checkUrl(String url);
 
 }

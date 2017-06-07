@@ -21,26 +21,35 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
-import butterknife.Bind;
+import java.util.List;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cz.sedlaj19.autoskola.Constants;
 import cz.sedlaj19.autoskola.R;
 import cz.sedlaj19.autoskola.domain.executor.impl.ThreadExecutor;
+import cz.sedlaj19.autoskola.domain.model.Car;
 import cz.sedlaj19.autoskola.domain.repository.Container;
 import cz.sedlaj19.autoskola.presentation.presenters.InstructorPresenter;
 import cz.sedlaj19.autoskola.presentation.presenters.impl.InstructorPresenterImpl;
 import cz.sedlaj19.autoskola.presentation.ui.adapters.SectionsPagerAdapter;
+import cz.sedlaj19.autoskola.presentation.ui.fragments.AddFragmentDialog;
+import cz.sedlaj19.autoskola.presentation.ui.listeners.AddListener;
+import cz.sedlaj19.autoskola.sync.RxFirebaseObserver;
 import cz.sedlaj19.autoskola.threading.MainThreadImpl;
 
-public class InstructorActivity extends AppCompatActivity implements InstructorPresenter.View{
+public class InstructorActivity extends AppCompatActivity implements
+        InstructorPresenter.View,
+        AddListener{
 
-    @Bind(R.id.instructor_container)
+    @BindView(R.id.instructor_container)
     ViewPager mViewPager;
-    @Bind(R.id.instructor_progress_wrapper)
+    @BindView(R.id.instructor_progress_wrapper)
     View mProgressWrapper;
-    @Bind(R.id.instructor_tabs)
+    @BindView(R.id.instructor_tabs)
     TabLayout mTabLayout;
-    @Bind(R.id.instructor_toolbar)
+    @BindView(R.id.instructor_toolbar)
     Toolbar toolbar;
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
@@ -78,6 +87,7 @@ public class InstructorActivity extends AppCompatActivity implements InstructorP
         // TODO nevzdy je nutne loadovat znovu
 //        mInstructorPresenter.getAllStudents();
         mInstructorPresenter.getAllInstructors();
+        mInstructorPresenter.getCars();
     }
 
     @Override
@@ -89,19 +99,20 @@ public class InstructorActivity extends AppCompatActivity implements InstructorP
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
-        if (id == R.id.menu_instructor_logout) {
-            mInstructorPresenter.doLogout();
-            return true;
+        switch (id){
+            case R.id.menu_instructor_logout:
+                mInstructorPresenter.doLogout();
+                return true;
+            case R.id.menu_instructor_add_car:
+                Intent intent = new Intent(this, ManageCarsActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.menu_instructor_websites:
+                // TODO: udelat nejakej loader
+                mInstructorPresenter.getWebsites();
+                return true;
         }
-
         return super.onOptionsItemSelected(item);
-    }
-
-    @OnClick(R.id.instructor_add_ride)
-    public void onAddRideBtnClicked(){
-        Intent intent = new Intent(getApplicationContext(), AddRideActivity.class);
-        startActivity(intent);
     }
 
     @Override
@@ -111,14 +122,15 @@ public class InstructorActivity extends AppCompatActivity implements InstructorP
         finish();
     }
 
-//    @Override
-//    public void onStudentsRetrieved() {
-//        // TODO
-//    }
-
     @Override
     public void onInstructorsRetrieved() {
         // TODO
+    }
+
+    @Override
+    public void onWebsitesRetrieved(String name) {
+        AddFragmentDialog.newInstance(R.string.change_website, name)
+                .show(getSupportFragmentManager(), "Change websites");
     }
 
     @Override
@@ -136,5 +148,15 @@ public class InstructorActivity extends AppCompatActivity implements InstructorP
     @Override
     public void showError(String message, int what) {
 
+    }
+
+    @Override
+    public void onCarsRetrieved(List<Car> cars) {
+        Log.d(this.getClass().toString(), "TEST: cars retrieved " + cars.size());
+    }
+
+    @Override
+    public void onAddSuccessful(String name) {
+        mInstructorPresenter.changeWebsite(name);
     }
 }

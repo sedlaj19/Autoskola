@@ -20,11 +20,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cz.sedlaj19.autoskola.Constants;
 import cz.sedlaj19.autoskola.R;
+import cz.sedlaj19.autoskola.domain.model.Car;
 import cz.sedlaj19.autoskola.utils.Converter;
 import cz.sedlaj19.autoskola.domain.executor.impl.ThreadExecutor;
 import cz.sedlaj19.autoskola.domain.model.Ride;
@@ -39,23 +40,23 @@ import cz.sedlaj19.autoskola.threading.MainThreadImpl;
 public class AddRideActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener,
         TimePickerDialog.OnTimeSetListener, AddRidePresenter.View{
 
-    @Bind(R.id.add_ride_progress_wrapper)
+    @BindView(R.id.add_ride_progress_wrapper)
     View mProgressWrapper;
-    @Bind(R.id.add_ride_date_picker)
+    @BindView(R.id.add_ride_date_picker)
     TextView mDatePicker;
-    @Bind(R.id.add_ride_time_picker)
+    @BindView(R.id.add_ride_time_picker)
     TextView mTimePicker;
-    @Bind(R.id.add_ride_students)
+    @BindView(R.id.add_ride_students)
     Spinner mStudents;
-    @Bind(R.id.add_ride_instructors)
+    @BindView(R.id.add_ride_instructors)
     Spinner mInstructors;
-    @Bind(R.id.add_ride_cars)
+    @BindView(R.id.add_ride_cars)
     Spinner mCars;
-    @Bind(R.id.add_ride_notes)
+    @BindView(R.id.add_ride_notes)
     EditText mNotes;
-    @Bind(R.id.add_ride_rides_title)
+    @BindView(R.id.add_ride_rides_title)
     TextView mAddRideTitle;
-    @Bind(R.id.add_ride_rides_list)
+    @BindView(R.id.add_ride_rides_list)
     ListView mRidesList;
 
     private AddRidePresenter mAddRidePresenter;
@@ -79,17 +80,30 @@ public class AddRideActivity extends AppCompatActivity implements DatePickerDial
     }
 
     private void init(){
-        this.mCalendar = Calendar.getInstance();
-        this.mDateSet = false;
-        this.mTimeSet = false;
+        initDateSet();
+        initBundle();
+        initPresenter();
+        initList();
         this.mAreInstructorsRetrieved = false;
         this.mAreStudentsRetrieved = false;
         mIsEdit = false;
+    }
+
+    private void initDateSet(){
+        this.mCalendar = Calendar.getInstance();
+        this.mDateSet = false;
+        this.mTimeSet = false;
+    }
+
+    private void initBundle(){
         Bundle bundle = getIntent().getExtras();
         if(bundle != null){
             mRideToEdit = bundle.getParcelable(Constants.Common.RIDE_TO_EDIT);
             mIsEdit = true;
         }
+    }
+
+    private void initPresenter(){
         mAddRidePresenter = new AddRidePresenterImpl(
                 ThreadExecutor.getInstance(),
                 MainThreadImpl.getInstance(),
@@ -97,15 +111,10 @@ public class AddRideActivity extends AppCompatActivity implements DatePickerDial
         );
         mAddRidePresenter.getStudentsNames();
         mAddRidePresenter.getInstructorsNames();
-        // TODO prozatimni reseni aut
-        List<String> names = new ArrayList<>();
-        names.add("Mitsubishi ASX");
-        names.add("Opel Astra");
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_item, names);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mCars.setAdapter(adapter);
+        mAddRidePresenter.getCars();
+    }
 
+    private void initList(){
         mAddRideAdapter = new AddRideAdapter();
         this.mRidesList.setAdapter(mAddRideAdapter);
     }
@@ -184,7 +193,6 @@ public class AddRideActivity extends AppCompatActivity implements DatePickerDial
 
     @Override
     public void onRideCreated(Ride ride) {
-        // TODO updatovat seznam jizd v instructor aktivite
         finish();
     }
 
@@ -261,4 +269,11 @@ public class AddRideActivity extends AppCompatActivity implements DatePickerDial
         mAddRidePresenter.getDayRides(date.getTime());
     }
 
+    @Override
+    public void onCarsRetrieved(List<String> names) {
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, names);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mCars.setAdapter(adapter);
+    }
 }

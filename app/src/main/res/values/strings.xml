@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">Autoskola</string>
+    <string name="undo">Undo</string>
+    <string name="ride_finished">Ride finished</string>
+    <string name="ride_deleted">Ride deleted</string>
+    <string name="student_finished">Student finished</string>
+    <string name="student_removed">Student removed</string>
 
     <!--Login screen-->
     <string name="e_mail">E-mail</string>
@@ -34,6 +39,7 @@
     <string name="student_dialog_title">Student info</string>
     <string name="call_student">Call</string>
     <string name="cancel">Cancel</string>
+    <string name="change_website">Change website</string>
     <!--End of instructor screen -->
 
     <!--Add ride screen-->
@@ -53,6 +59,9 @@
     <string name="instructor_default_title">Instructor</string>
     <string name="registration_title">Registration</string>
     <string name="add_ride_title">Add ride</string>
+    <string name="manage_cars">Manage cars</string>
+    <string name="add_car">Add car</string>
+    <string name="website">Website</string>
     <!--End of add ride screen-->
 
 </resources>

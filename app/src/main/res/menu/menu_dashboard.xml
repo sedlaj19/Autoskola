@@ -7,4 +7,10 @@
         android:orderInCategory="100"
         app:showAsAction="always"/>
 
+    <item
+        android:id="@+id/menu_dashboard_websites"
+        android:orderInCategory="105"
+        android:title="@string/website"
+        android:showAsAction="never"/>
+
 </menu>

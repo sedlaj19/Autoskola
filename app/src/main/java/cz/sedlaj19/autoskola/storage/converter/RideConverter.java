@@ -1,10 +1,12 @@
 package cz.sedlaj19.autoskola.storage.converter;
 
 
+import java.text.DateFormat;
 import java.util.Date;
 
 import cz.sedlaj19.autoskola.utils.Converter;
 import cz.sedlaj19.autoskola.storage.model.Ride;
+import is.stokkur.dateutils.DateUtils;
 
 /**
  * Created by Honza on 7. 8. 2016.
@@ -31,8 +33,7 @@ public class RideConverter {
         result.setStudent(ride.getStudent());
         result.setNotes(ride.getNotes());
 
-        Date d = new Date(ride.getDate());
-        result.setDate(Converter.convertDateAndTimeToString(d));
+        result.setDate(DateUtils.formatTimestampDateAndTime(ride.getDate(), DateFormat.FULL, DateFormat.SHORT));
 
         return result;
     }

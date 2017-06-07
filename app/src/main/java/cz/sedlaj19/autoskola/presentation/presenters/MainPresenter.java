@@ -3,7 +3,7 @@ package cz.sedlaj19.autoskola.presentation.presenters;
 
 import cz.sedlaj19.autoskola.domain.model.User;
 import cz.sedlaj19.autoskola.presentation.presenters.base.BasePresenter;
-import cz.sedlaj19.autoskola.presentation.ui.BaseView;
+import cz.sedlaj19.autoskola.presentation.ui.views.BaseView;
 
 public interface MainPresenter extends BasePresenter {
 

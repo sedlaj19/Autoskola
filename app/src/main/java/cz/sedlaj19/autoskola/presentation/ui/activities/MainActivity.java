@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cz.sedlaj19.autoskola.Constants;
@@ -24,17 +24,16 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
 
     private MainPresenter mMainPresenter;
 
-    @Bind(R.id.login_et_email)
+    @BindView(R.id.login_et_email)
     EditText mEmail;
-    @Bind(R.id.login_et_password)
+    @BindView(R.id.login_et_password)
     EditText mPassword;
-    @Bind(R.id.login_btn_login)
+    @BindView(R.id.login_btn_login)
     Button mLoginBtn;
-    @Bind(R.id.login_btn_register)
+    @BindView(R.id.login_btn_register)
     Button mRegisterBtn;
-    @Bind(R.id.login_progress_wrapper)
+    @BindView(R.id.login_progress_wrapper)
     View mProgress;
-//    @Bind(R.id.)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

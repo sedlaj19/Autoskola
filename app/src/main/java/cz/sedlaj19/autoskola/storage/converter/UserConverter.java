@@ -16,6 +16,7 @@ public class UserConverter {
         result.setName(user.getName());
         result.setPhone(user.getPhone());
         result.setSurname(user.getSurname());
+        result.setDeviceId(user.getDeviceId());
         return result;
     }
 
@@ -28,6 +29,7 @@ public class UserConverter {
         result.setName(user.getName());
         result.setPhone(user.getPhone());
         result.setSurname(user.getSurname());
+        result.setDeviceId(user.getDeviceId());
         return result;
     }
 

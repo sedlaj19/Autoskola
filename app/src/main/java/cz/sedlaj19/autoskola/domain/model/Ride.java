@@ -4,9 +4,11 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.text.DateFormat;
 import java.util.Date;
 
 import cz.sedlaj19.autoskola.utils.Converter;
+import is.stokkur.dateutils.DateUtils;
 
 /**
  * Created by Honza on 6. 8. 2016.
@@ -33,10 +35,22 @@ public class Ride implements Parcelable, Comparable<Ride>{
 
     public Ride(){}
 
-    public Ride(String car, String date, long dateMillis,
+    public Ride(String car, long dateMillis,
                 String instructor, String student, String notes){
         this.Car = car;
-        this.Date = date;
+        this.Date = DateUtils.formatTimestampDateAndTime(dateMillis, DateFormat.FULL, DateFormat.SHORT);
+        this.Instructor = instructor;
+        this.Completed = false;
+        this.DateMillis = dateMillis;
+        this.Student = student;
+        this.Notes = notes;
+    }
+
+    public Ride(String id, String car, long dateMillis,
+                String instructor, String student, String notes){
+        this.id = id;
+        this.Car = car;
+        this.Date = DateUtils.formatTimestampDateAndTime(dateMillis, DateFormat.FULL, DateFormat.SHORT);
         this.Instructor = instructor;
         this.Completed = false;
         this.DateMillis = dateMillis;
@@ -110,6 +124,11 @@ public class Ride implements Parcelable, Comparable<Ride>{
 
     public String getDateHoursMinutes(){
         return Converter.convertTimeToString(new Date(getDateMillis()));
+    }
+
+    public int getUniqueId(){
+        long modulo = DateMillis % 100000000;
+        return (int) modulo;
     }
 
     @Override

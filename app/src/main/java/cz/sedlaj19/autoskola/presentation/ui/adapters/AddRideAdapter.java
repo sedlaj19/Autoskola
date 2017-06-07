@@ -76,7 +76,7 @@ public class AddRideAdapter extends BaseAdapter {
         if(rides != null && !rides.isEmpty()){
             this.rides.clear();
         }
-        this.rides = rides;
+        this.rides = new ArrayList<>(rides);
 
         notifyDataSetChanged();
     }

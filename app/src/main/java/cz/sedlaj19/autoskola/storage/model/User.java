@@ -1,6 +1,9 @@
 package cz.sedlaj19.autoskola.storage.model;
 
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class User {
 
     private String id;
@@ -10,6 +13,7 @@ public class User {
     private String Email;
     private boolean Finished;
     private boolean IsInstructor;
+    private String DeviceId;
 
     public User(){}
 
@@ -76,6 +80,27 @@ public class User {
 
     public void setInstructor(boolean instructor) {
         IsInstructor = instructor;
+    }
+
+    public String getDeviceId() {
+        return DeviceId;
+    }
+
+    public void setDeviceId(String deviceId) {
+        DeviceId = deviceId;
+    }
+
+    public Map<String, Object> toMap(){
+        HashMap<String, Object> out = new HashMap<>();
+        out.put("id", id);
+        out.put("name", getName());
+        out.put("surname", getSurname());
+        out.put("phone", getPhone());
+        out.put("email", getEmail());
+        out.put("finished", isFinished());
+        out.put("instructor", isInstructor());
+        out.put("deviceId", getDeviceId());
+        return out;
     }
 
     @Override

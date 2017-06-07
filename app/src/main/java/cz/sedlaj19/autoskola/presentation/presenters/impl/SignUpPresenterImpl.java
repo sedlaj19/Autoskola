@@ -44,7 +44,7 @@ public class SignUpPresenterImpl extends AbstractPresenter implements SignUpPres
 
     @Override
     public void doSignUp(String email, String password, String firstname, String surname,
-                         String phone, boolean instructor, String instructorPassword) {
+                         String phone, boolean instructor, String instructorPassword, String deviceId) {
         // TODO: check rest of the user attributes
         if(!email.contains("@")){
             view.showError("Wrong email address.", Constants.Login.LOGIN_ERROR_EMAIL);
@@ -59,7 +59,7 @@ public class SignUpPresenterImpl extends AbstractPresenter implements SignUpPres
             return;
         }
         view.showProgress();
-        this.user = new User(firstname, surname, phone, email, instructor);
+        this.user = new User(firstname, surname, phone, email, instructor, deviceId);
         SignUpInteractor signUpInteractor = new SignUpInteractorImpl(
                 ThreadExecutor.getInstance(),
                 MainThreadImpl.getInstance(),

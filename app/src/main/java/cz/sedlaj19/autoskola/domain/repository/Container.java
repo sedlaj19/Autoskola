@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cz.sedlaj19.autoskola.domain.model.Car;
 import cz.sedlaj19.autoskola.domain.model.Ride;
 import cz.sedlaj19.autoskola.domain.model.User;
 
@@ -21,6 +22,7 @@ public class Container {
     private List<User> students;
     private List<User> instructors;
     private List<Ride> rides;
+    private List<Car> cars;
     private User loggedInUser;
     private boolean isRideChange;
     private int updatedRidePosition;
@@ -33,6 +35,7 @@ public class Container {
         students = new ArrayList<>();
         instructors = new ArrayList<>();
         rides = new ArrayList<>();
+        cars = new ArrayList<>();
         isRideChange = false;
     }
 
@@ -134,6 +137,28 @@ public class Container {
 
 // END OF RIDES
 
+    // CARS
+    public static Container getOurInstance() {
+        return ourInstance;
+    }
+
+    public static void setOurInstance(Container ourInstance) {
+        Container.ourInstance = ourInstance;
+    }
+
+    public List<Car> getCars() {
+        return cars;
+    }
+
+    public void setCars(List<Car> cars) {
+        this.cars = cars;
+    }
+
+    public void addCar(Car car){
+        this.cars.add(car);
+    }
+    // END OF CARS
+
     public String getUserNameByKey(String key){
         for(User user : this.instructors){
             if(user.getId().equals(key)){
@@ -146,5 +171,24 @@ public class Container {
             }
         }
         return "Unknown user";
+    }
+
+    public String getCarByKey(String key){
+        // TODO: podivat se proc to v seznamu jizd nenajde auto ...
+        for(Car car : cars){
+            if(car.getId().equals(key)){
+                return car.getName();
+            }
+        }
+        return "Unknown car";
+    }
+
+    public String getCarKeyByName(String name){
+        for(Car car : cars){
+            if(car.getName().equals(name)){
+                return car.getId();
+            }
+        }
+        return "";
     }
 }
