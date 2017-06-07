@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="few_minutes_ago">Před pár minutami</string>
+    <string name="in_a_moment">Za chvíli</string>
+    <string name="in_few_minutes">Za pár minut</string>
+    <string name="now">Teď</string>
+    <string name="today">Dnes</string>
+    <string name="tomorrow">Zítra</string>
+    <string name="yesterday">Včera</string>
+
+    <plurals name="in_seconds">
+        <item quantity="one">Za %d sekundu</item>
+        <item quantity="few">Za %d sekundy</item>
+        <item quantity="other">Za %d sekund</item>
+    </plurals>
+    <plurals name="in_minutes">
+        <item quantity="one">Za %l minutu</item>
+        <item quantity="few">Za %l minuty</item>
+        <item quantity="other">Za %l minut</item>
+    </plurals>
+    <plurals name="in_hours">
+        <item quantity="one">Za %d hodinu</item>
+        <item quantity="few">Za %d hodiny</item>
+        <item quantity="other">Za %d hodin</item>
+    </plurals>
+    <plurals name="in_days">
+        <item quantity="one">Za %d den</item>
+        <item quantity="few">Za %d dny</item>
+        <item quantity="other">Za %d dní</item>
+    </plurals>
+    <plurals name="in_months">
+        <item quantity="one">Za %d měsíc</item>
+        <item quantity="few">Za %d měsíce</item>
+        <item quantity="other">Za %d měsíců</item>
+    </plurals>
+    <plurals name="in_years">
+        <item quantity="one">Za %d rok</item>
+        <item quantity="few">Za %d roky</item>
+        <item quantity="other">Za %d let</item>
+    </plurals>
+    <plurals name="seconds_ago">
+        <item quantity="one">Před %d sekundou</item>
+        <item quantity="other">Před %d sekundami</item>
+    </plurals>
+    <plurals name="minutes_ago">
+        <item quantity="one">Před %d minutou</item>
+        <item quantity="other">Před %d minutami</item>
+    </plurals>
+    <plurals name="hours_ago">
+        <item quantity="one">Před %d hodinou</item>
+        <item quantity="other">Před %d hodinami</item>
+    </plurals>
+    <plurals name="days_ago">
+        <item quantity="one">Před %d dnem</item>
+        <item quantity="other">Před %d dny</item>
+    </plurals>
+    <plurals name="months_ago">
+        <item quantity="one">Před %d měsícem</item>
+        <item quantity="other">Před %d měsíci</item>
+    </plurals>
+    <plurals name="years_ago">
+        <item quantity="one">Před %d rokem</item>
+        <item quantity="few">Před %d roky</item>
+        <item quantity="other">Před %d years</item>
+    </plurals>
+</resources>
